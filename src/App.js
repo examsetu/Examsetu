@@ -1,39 +1,30 @@
- import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+
+// Blocks non-logged-in users from /dashboard
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" />;
+}
 
 function App() {
   return (
-    <div className="app">
-
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="logo">📚 ExamSetu</div>
-        <div className="nav-links">
-  <button className="nav-btn">Exams</button>
-  <button className="nav-btn">Notes</button>
-  <button className="nav-btn">Current Affairs</button>
-  <button className="nav-btn">Leaderboard</button>
-</div>
-        <div className="nav-btns">
-          <button className="btn-outline">Login</button>
-          <button className="btn-primary">Start Free</button>
-        </div>
-      </nav>
-
-      {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-tag">🇮🇳 India's #1 Govt Exam Prep</div>
-        <h1>Crack SSC, Railways, Police, Banking & Cyber</h1>
-        <p>Topic-wise MCQs · Adaptive learning · Daily current affairs</p>
-        <div className="stats-row">
-          <div className="stat"><strong>50,000+</strong><span>Students</span></div>
-          <div className="stat"><strong>10,000+</strong><span>Questions</span></div>
-          <div className="stat"><strong>9</strong><span>Exam categories</span></div>
-          <div className="stat"><strong>Daily</strong><span>Current affairs</span></div>
-        </div>
-      </section>
-
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute><Dashboard/></ProtectedRoute>
+          } />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
 export default App;

@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import ExamPage from './pages/ExamPage';
 import TopicPage from './pages/TopicPage';
 import QuizPage from './pages/QuizPage';
+import AdminPage from './pages/AdminPage';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/exam/:examName" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
           <Route path="/topic/:examName/:subjectName" element={<ProtectedRoute><TopicPage /></ProtectedRoute>} />
           <Route path="/quiz/:examName/:subjectName/:topicName/:difficulty" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

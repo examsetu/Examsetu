@@ -35,7 +35,9 @@ function Dashboard() {
         <p style={{color:'#888',fontSize:'14px',marginBottom:'32px'}}>Choose an exam to start preparing</p>
         <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'16px'}}>
           {exams.map((exam) => (
-            <div key={exam.name} style={{background:'white',borderRadius:'14px',padding:'28px 16px',textAlign:'center',cursor:'pointer',boxShadow:'0 2px 12px rgba(0,0,0,0.06)',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px'}}>
+            <div key={exam.name}
+              onClick={() => navigate('/exam/' + exam.name)}
+              style={{background:'white',borderRadius:'14px',padding:'28px 16px',textAlign:'center',cursor:'pointer',boxShadow:'0 2px 12px rgba(0,0,0,0.06)',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px'}}>
               <span style={{fontSize:'32px'}}>{exam.icon}</span>
               <span style={{fontSize:'14px',fontWeight:'600',color:'#1a1a2e'}}>{exam.name}</span>
             </div>
